@@ -1,212 +1,113 @@
 const steps = [
   {
-    num: "01",
-    who: "Vous (Hôtel)",
+    number: "01",
+    title: "Configuration de votre hôtel",
+    description: "Nous préparons votre page : logo, couleurs, horaires, Wi-Fi, services, messages d'accueil, recommandations locales et premiers formulaires CRM.",
     icon: "🏨",
-    title: "Création de votre espace hôtel",
-    description:
-      "Via le générateur d'administration, vous renseignez le nom, le slug, les couleurs, le logo et les informations de votre établissement. Votre espace est prêt en moins de 5 minutes.",
-    details: ["Slug → sous-domaine automatique", "Branding white-label complet", "Comptes réception créés"],
-    color: "#c9a84c",
+    highlight: "Mise en place accompagnée",
   },
   {
-    num: "02",
-    who: "Vous (Hôtel)",
-    icon: "📋",
-    title: "Configuration des services",
-    description:
-      "Paramétrez le WiFi, les horaires, les recommandations locales, les types de demandes de service. Votre concierge digital reflète exactement votre offre.",
-    details: [
-      "Recommandations géolocalisées",
-      "Catégories de services",
-      "Paramètres séjour (check-in/out)",
-    ],
-    color: "#c9a84c",
+    number: "02",
+    title: "Installation des pancartes NFC & QR code",
+    description: "Les supports peuvent être placés en chambre, à la réception, au comptoir petit-déjeuner, près de l'ascenseur ou dans les espaces communs.",
+    icon: "📲",
+    highlight: "Sans contact, sans application",
   },
   {
-    num: "03",
-    who: "Votre client",
+    number: "03",
+    title: "Le client accède à son guide hôtel",
+    description: "Il retrouve les réponses utiles, contacte la réception, fait une demande housekeeping, découvre les adresses partenaires et peut laisser ses coordonnées.",
+    icon: "✨",
+    highlight: "Expérience fluide côté client",
+  },
+  {
+    number: "04",
+    title: "Vos équipes pilotent les demandes",
+    description: "La réception suit les messages, les demandes de service, les priorités et les informations CRM collectées, avec une meilleure coordination opérationnelle.",
+    icon: "💻",
+    highlight: "Moins d'oublis, plus de suivi",
+  },
+];
+
+const layers = [
+  {
+    title: "Espace Client",
     icon: "📱",
-    title: "Arrivée & Connexion NFC / QR",
-    description:
-      "À l'arrivée en chambre, le client approche simplement son smartphone de la puce NFC ou scanne le QR code. Il accède instantanément à son portail d'accueil personnalisé, sans aucun téléchargement d'application.",
-    details: [
-      "Puce NFC sans contact intégrée sur support élégant (bois/métal) en chambre",
-      "QR code complémentaire à scan rapide",
-      "Zéro friction : accès direct au wifi et aux services de l'hôtel",
-    ],
-    color: "#e8c97a",
+    items: ["Accès NFC & QR", "Questions fréquentes", "Messagerie", "Demandes housekeeping", "Offres et partenaires"],
   },
   {
-    num: "04",
-    who: "Votre équipe",
-    icon: "💼",
-    title: "Gestion en temps réel",
-    description:
-      "La réception reçoit les messages et demandes de service instantanément via Socket.IO. Elle répond depuis son dashboard, le client voit la réponse en temps réel.",
-    details: [
-      "Notifications push en réception",
-      "File de demandes priorisée",
-      "Historique complet par séjour",
-    ],
-    color: "#e8c97a",
+    title: "Interface Équipe Hôtel",
+    icon: "💻",
+    items: ["Demandes priorisées", "Historique des échanges", "Suivi des statuts", "Coordination réception/étages", "Alertes satisfaction"],
   },
   {
-    num: "05",
-    who: "Votre client",
-    icon: "⭐",
-    title: "Avis avant départ",
-    description:
-      "Juste avant le check-out, le client est invité à noter son séjour. Vous récoltez des avis authentiques et pouvez corriger les insatisfactions avant que le client parte.",
-    details: ["Détection précoce des problèmes", "Augmentation du NPS", "Avis horodatés par séjour"],
-    color: "#c9a84c",
-  },
-  {
-    num: "06",
-    who: "Vous (Admin)",
+    title: "CRM & Pilotage",
     icon: "📊",
-    title: "Analyse & optimisation",
-    description:
-      "Consultez les analytics, les profils guests enrichis, les tags CRM et les statistiques de satisfaction pour améliorer continuellement votre service.",
-    details: ["Profils guests persistants", "Tags et segmentation CRM", "Tableau de bord multi-hôtels"],
-    color: "#c9a84c",
+    items: ["Coordonnées clients", "Préférences", "Segmentation", "Offres ciblées", "Partenariats locaux"],
   },
 ];
 
 export default function HowItWorksSection() {
   return (
-    <section id="how" className="relative py-32 bg-[#0d0d16]">
-      {/* Ambient */}
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[#c9a84c]/4 blur-[120px] pointer-events-none" />
+    <section id="how" className="relative py-28 lg:py-36 bg-[#0d0d16]">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[600px] h-[400px] rounded-full bg-[#c9a84c]/3 blur-[180px]" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#c9a84c]/25 bg-[#c9a84c]/5 text-[#c9a84c] text-xs font-medium mb-4">
-            Comment ça marche
-          </div>
-          <h2 className="font-['Playfair_Display',serif] text-4xl sm:text-5xl font-bold mb-4">
-            De l'onboarding au{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a84c] to-[#e8c97a]">
-              séjour parfait
-            </span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16 lg:mb-20">
+          <span className="badge-gold mb-5 inline-flex">Déploiement</span>
+          <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold mb-5 text-white">
+            Une mise en place simple pour un lancement le 1er juin 2026
           </h2>
-          <p className="text-white/50 max-w-xl mx-auto">
-            Un parcours pensé pour l'hôtel comme pour le client, de la configuration initiale
-            jusqu'aux analytics post-séjour.
+          <p className="text-white/45 max-w-xl mx-auto text-base lg:text-lg">
+            L'objectif : tester rapidement la valeur auprès de vos clients, sans projet informatique lourd côté hôtel.
           </p>
         </div>
 
-        {/* Steps */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#c9a84c]/30 via-[#c9a84c]/10 to-transparent hidden sm:block" />
-
-          <div className="space-y-12">
-            {steps.map((step, i) => (
-              <div
-                key={i}
-                className={`relative flex flex-col sm:flex-row gap-8 ${
-                  i % 2 === 1 ? "sm:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Content side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+          {steps.map((step, i) => (
+            <div key={i} className="group relative bg-white/[0.02] border border-white/8 rounded-2xl p-7 hover:border-[#c9a84c]/25 hover:bg-[#c9a84c]/2 transition-all duration-300">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#c9a84c]/4 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="relative flex items-start gap-5">
+                <div className="flex-shrink-0">
+                  <div className="font-playfair text-3xl lg:text-4xl font-bold text-[#c9a84c]/25 group-hover:text-[#c9a84c]/50 transition-colors duration-300 leading-none">{step.number}</div>
+                </div>
                 <div className="flex-1">
-                  <div
-                    className={`bg-white/2 border border-white/8 rounded-2xl p-6 hover:border-[#c9a84c]/25 transition-all duration-300 ${
-                      i % 2 === 1 ? "sm:ml-8" : "sm:mr-8"
-                    }`}
-                  >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="text-2xl">{step.icon}</div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-mono text-[#c9a84c]">{step.num}</span>
-                          <span className="text-xs text-white/30 bg-white/5 px-2 py-0.5 rounded-full">
-                            {step.who}
-                          </span>
-                        </div>
-                        <h3 className="font-semibold text-white text-lg">{step.title}</h3>
-                      </div>
-                    </div>
-                    <p className="text-white/50 text-sm leading-relaxed mb-4">{step.description}</p>
-                    <ul className="space-y-1.5">
-                      {step.details.map((d, j) => (
-                        <li key={j} className="flex items-center gap-2 text-xs text-white/40">
-                          <span className="text-[#c9a84c]">→</span>
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <div className="flex items-center gap-2 mb-3"><span className="text-xl">{step.icon}</span><h3 className="font-semibold text-white text-base lg:text-lg">{step.title}</h3></div>
+                  <p className="text-white/45 text-sm leading-relaxed mb-4">{step.description}</p>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#c9a84c]/10 border border-[#c9a84c]/20"><span className="text-[#c9a84c] text-xs font-medium">→ {step.highlight}</span></div>
                 </div>
-
-                {/* Center dot */}
-                <div className="hidden sm:flex flex-col items-center justify-start pt-6 flex-shrink-0 w-0">
-                  <div
-                    className="w-4 h-4 rounded-full border-2 border-[#c9a84c] bg-[#0d0d16] shadow-lg shadow-[#c9a84c]/30"
-                    style={{ marginLeft: "-7px" }}
-                  />
-                </div>
-
-                {/* Empty side for alternation */}
-                <div className="flex-1 hidden sm:block" />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
-        {/* Architecture visual */}
-        <div className="mt-20 bg-white/2 border border-white/8 rounded-2xl p-8">
-          <h3 className="text-center font-['Playfair_Display',serif] text-2xl font-semibold mb-8">
-            Architecture multi-tenant
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              {
-                title: "Layer Client",
-                icon: "📱",
-                items: ["Page Guest (NFC & QR)", "Messagerie", "Recommandations", "Demandes service"],
-                bg: "from-[#c9a84c]/10",
-              },
-              {
-                title: "Layer Réception",
-                icon: "💻",
-                items: ["Dashboard réception", "File de demandes", "Chat en temps réel", "Avis & reviews"],
-                bg: "from-[#e8c97a]/10",
-              },
-              {
-                title: "Layer Admin",
-                icon: "🔧",
-                items: [
-                  "Multi-hôtels",
-                  "Générateur d'hôtel",
-                  "Gestion utilisateurs",
-                  "Analytics globaux",
-                ],
-                bg: "from-[#c9a84c]/10",
-              },
-            ].map((layer, i) => (
-              <div
-                key={i}
-                className={`bg-gradient-to-b ${layer.bg} to-transparent border border-white/8 rounded-xl p-5`}
-              >
-                <div className="text-2xl mb-2">{layer.icon}</div>
-                <h4 className="font-semibold text-[#c9a84c] mb-3">{layer.title}</h4>
-                <ul className="space-y-2">
-                  {layer.items.map((item, j) => (
-                    <li key={j} className="text-sm text-white/50 flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-[#c9a84c]/50 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+        <div className="section-divider mb-16" />
+
+        <div className="text-center mb-10">
+          <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-white mb-3">Trois niveaux de valeur</h3>
+          <p className="text-white/40 text-sm max-w-lg mx-auto">Le client gagne en autonomie, l'équipe gagne du temps, la direction enrichit son CRM et ses revenus annexes.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {layers.map((layer) => (
+            <div key={layer.title} className="bg-white/[0.02] border border-white/8 rounded-2xl p-6 hover:border-[#c9a84c]/20 transition-all duration-300">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 flex items-center justify-center text-lg">{layer.icon}</div>
+                <h4 className="font-semibold text-white">{layer.title}</h4>
               </div>
-            ))}
-          </div>
-          <div className="mt-6 text-center text-xs text-white/30 font-mono">
-            PostgreSQL central · hotel_id row-level isolation · Socket.IO real-time · JWT auth
-          </div>
+              <ul className="space-y-2.5">
+                {layer.items.map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-white/50"><span className="w-1 h-1 rounded-full bg-[#c9a84c]/60 flex-shrink-0" />{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <p className="text-white/25 text-xs">Données clients collectées avec consentement · Expérience adaptée à l'image de l'hôtel · Supports NFC/QR prêts pour le terrain</p>
         </div>
       </div>
     </section>

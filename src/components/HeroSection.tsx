@@ -1,153 +1,89 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+
+const rotatingWords = ["connecté", "rentable", "fluide", "local", "sans friction"];
 
 export default function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [wordIdx, setWordIdx] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles: { x: number; y: number; vx: number; vy: number; alpha: number; size: number }[] = [];
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.5 + 0.1,
-        size: Math.random() * 2 + 0.5,
-      });
-    }
-
-    let animId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${p.alpha})`;
-        ctx.fill();
-      });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", handleResize);
-    };
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setWordIdx((i) => (i + 1) % rotatingWords.length);
+        setVisible(true);
+      }, 350);
+    }, 2800);
+    return () => clearInterval(interval);
   }, []);
 
+  const scrollTo = (id: string) => {
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#0f0f1e] to-[#0a0a14]" />
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0f]">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#c9a84c]/6 blur-[180px] glow-pulse" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-[#c9a84c]/3 blur-[150px]" />
+        <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-[#e8c97a]/3 blur-[150px]" />
+      </div>
 
-      {/* Radial glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#c9a84c]/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-2/3 right-1/4 w-[400px] h-[400px] rounded-full bg-[#c9a84c]/3 blur-[100px] pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.025]" style={{ backgroundImage: `linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
 
-      {/* Animated particles */}
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none opacity-60" />
-
-      {/* Grid lines */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-5"
-        style={{
-          backgroundImage: `linear-gradient(rgba(201,168,76,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.3) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#c9a84c]/30 bg-[#c9a84c]/5 text-[#c9a84c] text-sm font-medium mb-8">
-          <span className="w-2 h-2 rounded-full bg-[#c9a84c] animate-pulse" />
-          SaaS B2B · Multi-tenant · Paris Hospitality Tech
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">
+        <div className="animate-fade-in-up flex justify-center mb-7">
+          <span className="badge-gold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
+            Lancement officiel · 1er juin 2026 · Hôtels parisiens
+          </span>
         </div>
 
-        {/* Heading */}
-        <h1 className="font-['Playfair_Display',serif] text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-          Le{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a84c] to-[#e8c97a]">
-            concierge digital
+        <h1 className="animate-fade-in-up-delay-1 font-playfair font-bold text-4xl sm:text-5xl lg:text-7xl leading-[1.08] tracking-tight text-white mb-6">
+          Le concierge digital
+          <br />
+          <span className="text-gold-gradient inline-block transition-all duration-350" style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(8px)" }}>
+            {rotatingWords[wordIdx]}
           </span>
           <br />
-          que vos clients attendaient
+          <span className="text-white/90">pour votre hôtel</span>
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Paris Local transforme l'expérience client de votre hôtel : accueil ultra-rapide par NFC & QR code, messagerie
-          temps réel, recommandations locales personnalisées, et tableau de bord réception centralisé.
+        <p className="animate-fade-in-up-delay-2 text-white/50 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
+          Paris Local transforme chaque pancarte NFC ou QR code en canal direct avec vos clients : réponses aux questions fréquentes, collecte de coordonnées CRM, demandes housekeeping, recommandations locales et offres ciblées — sans application à télécharger.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <a
-            href="#cta"
-            className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-base hover:opacity-90 transition-all duration-200 shadow-lg shadow-[#c9a84c]/20"
-          >
-            Demander une démo gratuite
-          </a>
-          <a
-            href="#features"
-            className="px-8 py-4 rounded-xl border border-white/15 text-white/80 hover:bg-white/5 hover:border-white/30 font-medium text-base transition-all duration-200"
-          >
-            Découvrir les fonctionnalités →
-          </a>
+        <div className="animate-fade-in-up-delay-3 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <button onClick={() => scrollTo("#contact")} className="group px-8 py-4 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-xl shadow-[#c9a84c]/25 hover:shadow-[#c9a84c]/40 hover:scale-[1.02] flex items-center gap-2">
+            Réserver ma démo de lancement
+            <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </button>
+          <button onClick={() => scrollTo("#features")} className="px-8 py-4 rounded-xl border border-white/12 text-white/70 hover:text-white hover:border-white/25 hover:bg-white/4 font-medium text-sm transition-all duration-200 flex items-center gap-2">
+            Voir les bénéfices hôtel
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          </button>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
+        <div className="animate-fade-in-up-delay-4 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
           {[
-            { value: "< 1h", label: "Onboarding hôtel" },
-            { value: "NFC & QR", label: "Accès client instantané" },
-            { value: "Temps réel", label: "Messagerie Socket.IO" },
-            { value: "Multi-hôtels", label: "Architecture SaaS" },
+            { value: "NFC + QR", label: "Accès client instantané" },
+            { value: "CRM", label: "Emails & téléphones qualifiés" },
+            { value: "- appels", label: "Moins de questions répétitives" },
+            { value: "Housekeeping", label: "Demandes suivies et priorisées" },
           ].map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-white/3 border border-white/8 rounded-xl p-4 backdrop-blur-sm"
-            >
-              <div className="text-[#c9a84c] font-semibold text-lg font-['Playfair_Display',serif]">
-                {stat.value}
-              </div>
-              <div className="text-white/50 text-xs mt-1">{stat.label}</div>
+            <div key={stat.label} className="bg-white/2 border border-white/7 rounded-xl p-4 hover:border-[#c9a84c]/20 transition-colors duration-300">
+              <div className="font-playfair font-bold text-[#c9a84c] text-lg sm:text-xl mb-1">{stat.value}</div>
+              <div className="text-white/40 text-xs leading-snug">{stat.label}</div>
             </div>
           ))}
         </div>
-
-        {/* Scroll indicator */}
-        <div className="mt-20 flex flex-col items-center gap-2 text-white/30 text-xs">
-          <span>Découvrir</span>
-          <div className="w-px h-10 bg-gradient-to-b from-[#c9a84c]/40 to-transparent animate-pulse" />
-        </div>
       </div>
 
-      {/* Bottom gradient fade */}
+      <button onClick={() => scrollTo("#features")} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 hover:text-white/50 transition-colors duration-300">
+        <span className="text-xs tracking-widest uppercase">Découvrir</span>
+        <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent animate-float" />
+      </button>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent pointer-events-none" />
     </section>
   );

@@ -1,30 +1,27 @@
-# --- Étape de Build ---
-FROM node:20-alpine AS build
+# Dockerfile de production pour Coolify
+# App React / Vite / Tailwind servie par Nginx
+
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copie des fichiers de dépendances
+# Installation reproductible des dépendances
 COPY package*.json ./
-
-# Installation des dépendances
 RUN npm ci
 
-# Copie du reste du code source
+# Build de l'application
 COPY . .
-
-# Build de l'application de production
 RUN npm run build
 
-# --- Étape de Production ---
-FROM nginx:alpine
+# Image finale légère avec Nginx
+FROM nginx:1.27-alpine AS runner
 
-# Copie de la configuration Nginx
+# Configuration SPA : fallback vers index.html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copie du build statique vers le répertoire d'Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+# Fichiers générés par Vite
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Exposition du port 80
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

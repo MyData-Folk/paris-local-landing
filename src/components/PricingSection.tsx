@@ -1,208 +1,92 @@
-import { useState } from "react";
+const launchOffer = [
+  "Page client personnalisée aux couleurs de l'hôtel",
+  "Pancartes NFC sans contact + QR codes de lancement",
+  "Guide digital : Wi-Fi, horaires, services, transports et recommandations",
+  "Collecte CRM : email, téléphone, préférences et consentement",
+  "Demandes client : housekeeping, room service, taxi, bagagerie, maintenance",
+  "Mise en avant des partenaires locaux et offres sélectionnées",
+  "Accompagnement au paramétrage avant le lancement du 1er juin 2026",
+];
 
-const plans = [
-  {
-    name: "Starter",
-    tagline: "Idéal pour commencer",
-    price: { monthly: 59, yearly: 45 },
-    currency: "€",
-    period: "/ hôtel / mois",
-    highlight: false,
-    features: [
-      "1 hôtel",
-      "Jusqu'à 30 chambres",
-      "Pancarte NFC + QR code offerte",
-      "Accès NFC & QR code",
-      "Messagerie temps réel",
-      "Recommandations locales (20 max)",
-      "Demandes de service basiques",
-      "Tableau de bord réception",
-      "Support par email",
-    ],
-    cta: "Essayer gratuitement 14 jours",
-    notIncluded: ["Branding avancé", "Analytics", "Multi-hôtels", "API access"],
-  },
-  {
-    name: "Business",
-    tagline: "Pour les hôtels ambitieux",
-    price: { monthly: 99, yearly: 75 },
-    currency: "€",
-    period: "/ hôtel / mois",
-    highlight: true,
-    badge: "Le plus populaire",
-    features: [
-      "1 hôtel (chambres illimitées)",
-      "Pancarte NFC + QR codes personnalisés",
-      "Messagerie + Socket.IO temps réel",
-      "Recommandations illimitées",
-      "Toutes les demandes de service",
-      "Avis & satisfaction client",
-      "White-label complet",
-      "Analytics & événements",
-      "Profils guests enrichis + CRM tags",
-      "Support prioritaire",
-    ],
-    cta: "Démarrer en Business",
-    notIncluded: ["Multi-hôtels centralisé", "API partenaire"],
-  },
-  {
-    name: "Enterprise",
-    tagline: "Pour les groupes hôteliers",
-    price: { monthly: 159, yearly: 120 },
-    currency: "€",
-    period: "/ hôtel / mois",
-    highlight: false,
-    features: [
-      "Hôtels illimités",
-      "Dashboard multi-propriétés centralisé",
-      "Toutes les fonctionnalités Business",
-      "API REST documentée (OpenAPI)",
-      "Intégration PMS sur mesure",
-      "SLA 99.9% garanti",
-      "Onboarding dédié",
-      "Account Manager",
-      "Hébergement sur infrastructure dédiée",
-      "Personnalisations sur demande",
-    ],
-    cta: "Contacter l'équipe commerciale",
-    notIncluded: [],
-  },
+const options = [
+  { icon: "🏨", title: "Hôtel indépendant", text: "Une solution simple pour tester le concierge digital dans un premier établissement." },
+  { icon: "✨", title: "Boutique hôtel", text: "Une expérience brandée, premium et cohérente avec votre accueil sur place." },
+  { icon: "🤝", title: "Réseau local", text: "Une base idéale pour développer des commissions avec restaurants, taxis, guides et commerces." },
 ];
 
 export default function PricingSection() {
-  const [yearly, setYearly] = useState(false);
+  const scrollToContact = () => {
+    const el = document.querySelector("#contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <section id="pricing" className="relative py-32 bg-[#0d0d16]">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#c9a84c]/3 blur-[150px] pointer-events-none" />
+    <section id="pricing" className="relative py-28 lg:py-36 bg-[#0a0a0f]">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-[#c9a84c]/4 blur-[200px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#c9a84c]/25 bg-[#c9a84c]/5 text-[#c9a84c] text-xs font-medium mb-4">
-            Tarifs
-          </div>
-          <h2 className="font-['Playfair_Display',serif] text-4xl sm:text-5xl font-bold mb-4">
-            Des tarifs{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a84c] to-[#e8c97a]">
-              transparents
-            </span>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-12 lg:mb-16">
+          <span className="badge-gold mb-5 inline-flex">Offre de lancement</span>
+          <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold mb-5 text-white">
+            Rejoignez les premiers hôtels pilotes à partir du 1er juin 2026
           </h2>
-          <p className="text-white/50 max-w-xl mx-auto mb-8">
-            Sans frais cachés, sans engagement minimum. Essai gratuit 14 jours sur tous les plans.
+          <p className="text-white/45 max-w-2xl mx-auto text-base lg:text-lg">
+            Pour le lancement, l'objectif est d'installer une version utile, mesurable et exploitable rapidement, puis d'ajuster avec vos retours terrain.
           </p>
+        </div>
 
-          {/* Toggle */}
-          <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl p-1">
-            <button
-              onClick={() => setYearly(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                !yearly ? "bg-[#c9a84c] text-[#0a0a0f]" : "text-white/50 hover:text-white"
-              }`}
-            >
-              Mensuel
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-stretch">
+          <div className="lg:col-span-3 bg-gradient-to-b from-white/[0.04] to-white/[0.015] border border-[#c9a84c]/20 rounded-3xl p-8 lg:p-10 shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+              <div>
+                <div className="text-[#c9a84c] text-sm font-semibold mb-2">Pack Pilote Paris Local</div>
+                <h3 className="font-playfair text-3xl font-bold text-white">Démo + installation accompagnée</h3>
+              </div>
+              <div className="rounded-2xl bg-[#c9a84c]/10 border border-[#c9a84c]/25 px-4 py-3 text-center">
+                <div className="text-white/35 text-xs uppercase tracking-widest">Lancement</div>
+                <div className="text-[#c9a84c] font-playfair text-2xl font-bold">01/06/2026</div>
+              </div>
+            </div>
+
+            <ul className="space-y-3.5 mb-8">
+              {launchOffer.map((feature) => (
+                <li key={feature} className="flex items-start gap-3 text-sm">
+                  <span className="text-[#c9a84c] flex-shrink-0 mt-0.5">✓</span>
+                  <span className="text-white/65">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <button onClick={scrollToContact} className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-lg shadow-[#c9a84c]/20">
+              Demander les conditions de lancement
             </button>
-            <button
-              onClick={() => setYearly(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                yearly ? "bg-[#c9a84c] text-[#0a0a0f]" : "text-white/50 hover:text-white"
-              }`}
-            >
-              Annuel
-              <span className="ml-2 text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded-full">
-                -25%
-              </span>
-            </button>
+            <p className="mt-4 text-white/30 text-xs leading-relaxed">
+              Les tarifs et conditions finales sont présentés pendant la démo selon le nombre de chambres, les supports NFC souhaités et le niveau d'accompagnement.
+            </p>
+          </div>
+
+          <div className="lg:col-span-2 grid grid-cols-1 gap-4">
+            {options.map((item) => (
+              <div key={item.title} className="bg-white/[0.02] border border-white/8 rounded-2xl p-6 hover:border-[#c9a84c]/20 transition-all duration-300">
+                <div className="text-2xl mb-3">{item.icon}</div>
+                <h4 className="text-white font-semibold mb-2">{item.title}</h4>
+                <p className="text-white/42 text-sm leading-relaxed">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Plans */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className={`relative rounded-2xl p-8 flex flex-col transition-all duration-300 ${
-                plan.highlight
-                  ? "bg-gradient-to-b from-[#c9a84c]/15 to-[#c9a84c]/5 border-2 border-[#c9a84c]/40 shadow-2xl shadow-[#c9a84c]/10"
-                  : "bg-white/2 border border-white/8 hover:border-white/16"
-              }`}
-            >
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="px-4 py-1 bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] text-xs font-bold rounded-full shadow-lg">
-                    {plan.badge}
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-6">
-                <h3 className="font-['Playfair_Display',serif] text-2xl font-bold text-white mb-1">
-                  {plan.name}
-                </h3>
-                <p className="text-white/40 text-sm">{plan.tagline}</p>
-              </div>
-
-              <div className="mb-8">
-                {plan.price.monthly !== null ? (
-                  <div>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-[#c9a84c] font-['Playfair_Display',serif]">
-                        {yearly ? plan.price.yearly : plan.price.monthly}
-                      </span>
-                      <span className="text-white/50 text-sm">{plan.currency}</span>
-                    </div>
-                    <div className="text-white/30 text-sm">{plan.period}</div>
-                    {yearly && (
-                      <div className="text-green-400 text-xs mt-1">
-                        Économie de {((plan.price.monthly! - plan.price.yearly!) * 12).toFixed(0)}€/an
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div>
-                    <div className="text-3xl font-bold text-[#c9a84c] font-['Playfair_Display',serif]">
-                      Sur devis
-                    </div>
-                    <div className="text-white/30 text-sm mt-1">Tarification personnalisée</div>
-                  </div>
-                )}
-              </div>
-
-              <ul className="space-y-3 flex-1 mb-8">
-                {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-2.5 text-sm">
-                    <span className="text-[#c9a84c] flex-shrink-0">✓</span>
-                    <span className="text-white/70">{feature}</span>
-                  </li>
-                ))}
-                {plan.notIncluded.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-2.5 text-sm">
-                    <span className="text-white/20 flex-shrink-0">✗</span>
-                    <span className="text-white/25 line-through">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href="#cta"
-                className={`w-full text-center py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
-                  plan.highlight
-                    ? "bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] hover:opacity-90 shadow-lg shadow-[#c9a84c]/20"
-                    : "border border-white/15 text-white/80 hover:bg-white/5 hover:border-white/30"
-                }`}
-              >
-                {plan.cta}
-              </a>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { icon: "🧭", label: "Simple à tester", sub: "Pas de téléchargement côté client" },
+            { icon: "📈", label: "Orienté revenus", sub: "CRM, offres ciblées, partenaires" },
+            { icon: "🧹", label: "Opérationnel", sub: "Réception et housekeeping mieux coordonnés" },
+          ].map((g) => (
+            <div key={g.label} className="flex items-center gap-3 bg-white/[0.015] border border-white/6 rounded-xl px-5 py-4">
+              <span className="text-xl">{g.icon}</span>
+              <div><div className="text-white/70 text-sm font-medium">{g.label}</div><div className="text-white/30 text-xs">{g.sub}</div></div>
             </div>
           ))}
-        </div>
-
-        {/* FAQ teaser */}
-        <div className="mt-12 text-center text-white/40 text-sm">
-          Questions sur les tarifs ?{" "}
-          <a href="#cta" className="text-[#c9a84c] hover:underline">
-            Contactez-nous →
-          </a>
         </div>
       </div>
     </section>
