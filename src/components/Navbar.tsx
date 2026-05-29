@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 
-export default function Navbar({ activeSection: _activeSection }: { activeSection: string }) {
+export default function Navbar({
+  activeSection: _activeSection,
+  theme,
+  toggleTheme,
+}: {
+  activeSection: string;
+  theme: "dark" | "light";
+  toggleTheme: () => void;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -76,6 +84,21 @@ export default function Navbar({ activeSection: _activeSection }: { activeSectio
             >
               Demander une démo
             </a>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 theme-toggle-btn cursor-pointer flex items-center justify-center"
+              aria-label="Changer de thème"
+            >
+              {theme === "light" ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+              )}
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -134,6 +157,29 @@ export default function Navbar({ activeSection: _activeSection }: { activeSectio
           >
             Demander une démo
           </a>
+          <button
+            onClick={() => {
+              toggleTheme();
+              setMobileOpen(false);
+            }}
+            className="mt-2 p-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white flex items-center justify-center gap-2 text-sm cursor-pointer"
+          >
+            {theme === "light" ? (
+              <>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <span>Mode Sombre</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+                <span>Mode Clair</span>
+              </>
+            )}
+          </button>
         </div>
       )}
     </header>

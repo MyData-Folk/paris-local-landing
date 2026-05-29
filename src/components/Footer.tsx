@@ -84,22 +84,30 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
-            <ul className="space-y-2">
-              {[
-                { label: "Demander une démo", href: "#cta" },
-                { label: "Nous contacter", href: "#cta" },
-                { label: "Partenariats", href: "#cta" },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-white/40 text-sm hover:text-white/70 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-              <li>
+            <ul className="space-y-3">
+              <li className="text-white/40 text-sm">
+                <span className="text-white font-medium block">Mr. Farouk Azougli</span>
+                <span className="text-xs text-white/30 block mt-0.5">Fondateur & Directeur</span>
+              </li>
+              <li className="text-white/40 text-sm flex flex-col">
+                <span className="text-xs text-white/30">Email</span>
+                <a
+                  href="mailto:admin@e-hotelmanager.com"
+                  className="hover:text-[#c9a84c] transition-colors text-sm break-all font-mono"
+                >
+                  admin@e-hotelmanager.com
+                </a>
+              </li>
+              <li className="text-white/40 text-sm flex flex-col">
+                <span className="text-xs text-white/30">Tél</span>
+                <a
+                  href="tel:+33672590479"
+                  className="hover:text-[#c9a84c] transition-colors text-sm font-mono"
+                >
+                  +(33) 0672590479
+                </a>
+              </li>
+              <li className="pt-1">
                 <div className="flex items-center gap-2 text-[#c9a84c] text-sm">
                   <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                   Réponse sous 24h
