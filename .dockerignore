@@ -8,8 +8,6 @@ pnpm-debug.log*
 .gitignore
 .github
 
-README_DEPLOY_COOLIFY.md
-
 .env
 .env.*
 !.env.example
