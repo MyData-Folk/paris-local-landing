@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import HeroSection from "./components/HeroSection";
-import AuditSection from "./components/AuditSection";
 import FeaturesSection from "./components/FeaturesSection";
 import HowItWorksSection from "./components/HowItWorksSection";
+import OnboardingSection from "./components/OnboardingSection";
 import PricingSection from "./components/PricingSection";
-import RoadmapSection from "./components/RoadmapSection";
 import TestimonialsSection from "./components/TestimonialsSection";
 import CtaSection from "./components/CtaSection";
 import Navbar from "./components/Navbar";
@@ -39,9 +38,8 @@ export default function App() {
       <HeroSection />
       <FeaturesSection />
       <HowItWorksSection />
-      <AuditSection />
+      <OnboardingSection />
       <PricingSection />
-      <RoadmapSection />
       <TestimonialsSection />
       <CtaSection />
       <Footer />
