@@ -1,361 +1,128 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-}
+/* ─── Custom scrollbar ───────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #c9a84c33; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #c9a84c66; }
+
+/* ─── Base ───────────────────────────────────────── */
+html { scroll-behavior: smooth; }
 
 body {
+  background-color: #0a0a0f;
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0f;
-}
-::-webkit-scrollbar-thumb {
-  background: #c9a84c33;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #c9a84c66;
+/* ─── Playfair utility ───────────────────────────── */
+.font-playfair { font-family: 'Playfair Display', serif; }
+
+/* ─── Gold gradient text ─────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8c97a 50%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ============================================================
-   MODE CLAIR — Refonte complète, élégante et lisible
-   Palette : ivoire chaud / taupe / or #c9a84c
-   ============================================================ */
-
-/* ---------- Variables globales ---------- */
-:root {
-  --light-bg-base: #fdfbf7;
-  --light-bg-alt: #f5ede0;
-  --light-bg-card: #ffffff;
-  --light-text-primary: #1a1714;
-  --light-text-secondary: #4a4238;
-  --light-text-muted: #7a7060;
-  --light-text-faint: #a39880;
-  --light-border: rgba(201, 168, 76, 0.18);
-  --light-border-strong: rgba(201, 168, 76, 0.35);
-  --light-gold: #c9a84c;
-  --light-shadow-card: 0 2px 16px rgba(30, 20, 5, 0.06);
-  --light-shadow-hover: 0 8px 32px rgba(30, 20, 5, 0.10);
+/* ─── Animated underline ─────────────────────────── */
+.animated-underline {
+  position: relative;
 }
-
-/* ---------- Fond global & couleur de base ---------- */
-html.light {
-  background: var(--light-bg-base);
-  color: var(--light-text-primary);
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #c9a84c;
+  transition: width 0.3s ease;
 }
+.animated-underline:hover::after { width: 100%; }
 
-html.light body,
-html.light #root {
-  background: linear-gradient(160deg, #fdfbf7 0%, #f7f0e4 50%, #f2e9d8 100%);
-  background-attachment: fixed;
-  color: var(--light-text-primary);
+/* ─── Glow pulse ─────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
 }
+.glow-pulse { animation: glow-pulse 4s ease-in-out infinite; }
 
-/* Scrollbar */
-html.light ::-webkit-scrollbar-track { background: #f5ede0; }
-html.light ::-webkit-scrollbar-thumb { background: rgba(201, 168, 76, 0.4); }
-html.light ::-webkit-scrollbar-thumb:hover { background: rgba(201, 168, 76, 0.65); }
-
-/* ---------- Wrapper principal ---------- */
-html.light .min-h-screen {
-  background: transparent !important;
-  color: var(--light-text-primary);
+/* ─── Float animation ────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
 }
+.animate-float { animation: float 6s ease-in-out infinite; }
 
-/* ---------- Toutes sections : fond transparent + légère séparation alternée ---------- */
-html.light section {
-  background-color: transparent !important;
-  background-image: none !important;
+/* ─── Fade-in-up ─────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.7s ease both; }
+.animate-fade-in-up-delay-1 { animation: fadeInUp 0.7s ease 0.1s both; }
+.animate-fade-in-up-delay-2 { animation: fadeInUp 0.7s ease 0.2s both; }
+.animate-fade-in-up-delay-3 { animation: fadeInUp 0.7s ease 0.3s both; }
+.animate-fade-in-up-delay-4 { animation: fadeInUp 0.7s ease 0.4s both; }
+
+/* ─── Shimmer on cards ───────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* Sections sur fond légèrement distinct */
-html.light #how,
-html.light #pricing,
-html.light #testimonials {
-  background-color: rgba(255, 255, 255, 0.45) !important;
+/* ─── Ticker scroll ──────────────────────────────── */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker { animation: ticker 30s linear infinite; }
+
+/* ─── Subtle grain overlay ───────────────────────── */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
 }
 
-/* ---------- HÉRO : fond clair avec halo doré ---------- */
-html.light #hero {
-  background: transparent !important;
-}
-html.light #hero > div:first-child {
-  /* Remplace le gradient sombre */
-  background: linear-gradient(135deg, #fdfbf7 0%, #f5ede0 60%, #f0e5cc 100%) !important;
-}
-/* Canvas de particules : légèrement visible sur fond clair */
-html.light #hero canvas {
-  opacity: 0.3 !important;
-}
-/* Grid de lignes : très subtile */
-html.light #hero .opacity-5 {
-  opacity: 0.06 !important;
-}
-/* Gradient de fondu bas : adapté au fond clair */
-html.light #hero .from-\[\#0a0a0f\] {
-  --tw-gradient-from: var(--light-bg-alt) !important;
+/* ─── Section divider ────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a84c22, transparent);
 }
 
-/* ---------- NAVBAR ---------- */
-/* État transparent (haut de page) */
-html.light header {
-  background: transparent !important;
-  border-color: transparent !important;
-}
-/* État scrolled : verre dépoli ivoire */
-html.light header.scrolled-light,
-html.light header[class*="backdrop-blur"] {
-  background: rgba(253, 251, 247, 0.88) !important;
-  border-bottom-color: var(--light-border) !important;
-  box-shadow: 0 4px 24px rgba(30, 20, 5, 0.06) !important;
-  backdrop-filter: blur(14px) !important;
-}
-/* Menu mobile */
-html.light header > div:last-child {
-  background: rgba(253, 251, 247, 0.97) !important;
-  border-top-color: var(--light-border) !important;
+/* ─── Badge gold ─────────────────────────────────── */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.07);
+  color: #c9a84c;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-/* ---------- TEXTES ---------- */
-html.light .text-white {
-  color: var(--light-text-primary) !important;
-}
-html.light .text-white\/90 {
-  color: #1e1b16 !important;
-}
-html.light .text-white\/80 {
-  color: #2c2820 !important;
-}
-html.light .text-white\/70 {
-  color: var(--light-text-secondary) !important;
-}
-html.light .text-white\/60 {
-  color: #5a5246 !important;
-}
-html.light .text-white\/50 {
-  color: var(--light-text-muted) !important;
-}
-html.light .text-white\/40 {
-  color: #8c8070 !important;
-}
-html.light .text-white\/30 {
-  color: #a09080 !important;
-}
-html.light .text-white\/25 {
-  color: #b0a090 !important;
-}
-html.light .text-white\/20 {
-  color: #c0b0a0 !important;
+/* ─── Input focus ────────────────────────────────── */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: rgba(201,168,76,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
 }
 
-/* Strong / Bold dans les textes */
-html.light strong {
-  color: var(--light-text-primary) !important;
-}
-
-/* ---------- CARDS & CONTENEURS ---------- */
-html.light .bg-white\/2,
-html.light .bg-white\/3,
-html.light .bg-white\/4,
-html.light .bg-white\/5,
-html.light .bg-white\/8 {
-  background-color: rgba(255, 255, 255, 0.82) !important;
-  border-color: var(--light-border) !important;
-  box-shadow: var(--light-shadow-card) !important;
-}
-
-/* Card highlight (pricing, audit summary) */
-html.light .bg-white\/2.border.border-white\/8,
-html.light .bg-white\/3.border.border-white\/8 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: var(--light-border-strong) !important;
-  box-shadow: var(--light-shadow-hover) !important;
-}
-
-/* Hover sur les cards */
-html.light .hover\:border-\[\#c9a84c\]\/25:hover {
-  border-color: rgba(201, 168, 76, 0.5) !important;
-  box-shadow: var(--light-shadow-hover) !important;
-}
-html.light .hover\:border-\[\#c9a84c\]\/30:hover {
-  border-color: rgba(201, 168, 76, 0.55) !important;
-}
-
-/* ---------- BORDURES ---------- */
-html.light .border-white\/5,
-html.light .border-white\/8,
-html.light .border-white\/10 {
-  border-color: rgba(201, 168, 76, 0.14) !important;
-}
-html.light .border-white\/15,
-html.light .border-white\/20 {
-  border-color: var(--light-border) !important;
-}
-
-/* ---------- BACKDROP BLUR (stat cards hero, etc.) ---------- */
-html.light .backdrop-blur-sm,
-html.light .backdrop-blur-md {
-  background-color: rgba(255, 255, 255, 0.78) !important;
-  border-color: var(--light-border) !important;
-  backdrop-filter: blur(12px) !important;
-}
-
-/* ---------- BOUTONS SECONDAIRES ---------- */
-html.light a.border-white\/15,
-html.light button.border-white\/15 {
-  border-color: var(--light-border-strong) !important;
-  color: var(--light-text-secondary) !important;
-}
-html.light a.border-white\/15:hover,
-html.light button.border-white\/15:hover {
-  background-color: rgba(201, 168, 76, 0.08) !important;
-  border-color: var(--light-gold) !important;
-  color: var(--light-text-primary) !important;
-}
-
-/* ---------- INPUTS / FORMULAIRES ---------- */
-html.light input,
-html.light select,
-html.light textarea {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  color: var(--light-text-primary) !important;
-  border-color: var(--light-border-strong) !important;
-}
-html.light input:focus,
-html.light select:focus,
-html.light textarea:focus {
-  border-color: var(--light-gold) !important;
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12) !important;
-}
-html.light input::placeholder,
-html.light textarea::placeholder {
-  color: var(--light-text-faint) !important;
-}
-
-/* Input labels */
-html.light label {
-  color: var(--light-text-muted) !important;
-}
-
-/* ---------- AUDIT TABS ---------- */
-html.light button.bg-white\/5 {
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  border-color: var(--light-border) !important;
-  color: var(--light-text-secondary) !important;
-}
-html.light button.bg-white\/5:hover {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  color: var(--light-text-primary) !important;
-}
-
-/* ---------- PRICING TOGGLE ---------- */
-html.light .bg-white\/5.border.border-white\/10 {
-  background-color: rgba(245, 237, 224, 0.8) !important;
-  border-color: var(--light-border) !important;
-}
-
-/* ---------- TIMELINE LINE (HowItWorks) ---------- */
-html.light .bg-gradient-to-b.from-\[\#c9a84c\]\/30 {
-  opacity: 0.6 !important;
-}
-
-/* ---------- SECTIONS BG-0D0D16 (AuditSection, RoadmapSection, etc.) ---------- */
-html.light .bg-\[\#0d0d16\] {
-  background-color: transparent !important;
-}
-
-/* ---------- ARCHITECTURE LAYERS (HowItWorks) ---------- */
-html.light .bg-gradient-to-b.from-\[\#c9a84c\]\/10,
-html.light .bg-gradient-to-b.from-\[\#e8c97a\]\/10 {
-  background: linear-gradient(to bottom, rgba(201, 168, 76, 0.08), transparent) !important;
-}
-
-/* ---------- AUDIT SUMMARY GRADIENT ---------- */
-html.light .bg-gradient-to-r.from-\[\#c9a84c\]\/10 {
-  background: linear-gradient(to right, rgba(201, 168, 76, 0.1), transparent) !important;
-  border-color: rgba(201, 168, 76, 0.25) !important;
-}
-
-/* ---------- CTA SECTION ---------- */
-html.light .bg-gradient-to-b.from-white\/4 {
-  background: rgba(255, 255, 255, 0.85) !important;
-  border-color: var(--light-border) !important;
-  box-shadow: 0 8px 48px rgba(30, 20, 5, 0.07) !important;
-}
-html.light .bg-gradient-to-br.from-\[\#c9a84c\]\/10 {
-  background: linear-gradient(135deg, rgba(201, 168, 76, 0.09), transparent) !important;
-  border-right-color: var(--light-border) !important;
-}
-
-/* ---------- PRICING PLAN HIGHLIGHT ---------- */
-html.light .bg-gradient-to-b.from-\[\#c9a84c\]\/15 {
-  background: linear-gradient(to bottom, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.04)) !important;
-  border-color: rgba(201, 168, 76, 0.45) !important;
-}
-
-/* ---------- TECH STACK BADGES ---------- */
-html.light .font-mono.text-white\/60,
-html.light span.font-mono {
-  color: var(--light-text-secondary) !important;
-}
-html.light .bg-white\/4.border.border-white\/8,
-html.light .text-xs.bg-white\/3 {
-  background-color: rgba(201, 168, 76, 0.07) !important;
-  color: var(--light-text-secondary) !important;
-  border-color: rgba(201, 168, 76, 0.15) !important;
-}
-
-/* ---------- FOOTER ---------- */
-html.light footer {
-  background: rgba(245, 237, 224, 0.7) !important;
-  border-top-color: var(--light-border) !important;
-}
-html.light footer a {
-  color: var(--light-text-muted) !important;
-}
-html.light footer a:hover {
-  color: var(--light-text-primary) !important;
-}
-
-/* ---------- THEME TOGGLE BUTTON ---------- */
-html.light .theme-toggle-btn {
-  background-color: rgba(201, 168, 76, 0.12) !important;
-  border-color: var(--light-border-strong) !important;
-  color: var(--light-text-secondary) !important;
-}
-html.light .theme-toggle-btn:hover {
-  background-color: rgba(201, 168, 76, 0.2) !important;
-  color: var(--light-text-primary) !important;
-}
-
-/* ---------- AMBIENT GLOWS : plus doux en mode clair ---------- */
-html.light .bg-\[\#c9a84c\]\/3,
-html.light .bg-\[\#c9a84c\]\/4,
-html.light .bg-\[\#c9a84c\]\/5,
-html.light .bg-\[\#c9a84c\]\/6 {
-  opacity: 0.5 !important;
-}
-
-/* ---------- MOBILE MENU ---------- */
-html.light .md\:hidden.bg-\[\#0d0d16\] {
-  background: rgba(253, 251, 247, 0.97) !important;
-  border-top-color: var(--light-border) !important;
-}
-
-/* ---------- COULEURS FONCTIONNELLES (verts, rouges, bleus) conservées ---------- */
-/* Scores audit : on ne touche pas aux couleurs green/yellow/blue/red */
-
-
-/* ---------- MOBILE MENU (classe utilitaire) ---------- */
-html.light .light-mobile-menu {
-  background: rgba(253, 251, 247, 0.97) !important;
-  border-top-color: var(--light-border) !important;
+/* ─── Mobile menu backdrop ───────────────────────── */
+.mobile-backdrop {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
