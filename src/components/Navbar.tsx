@@ -63,7 +63,7 @@ export default function Navbar({ activeSection: _activeSection }: { activeSectio
               Accès Guest
             </a>
             <a
-              href="https://admin.hotelmanager.fr"
+              href="https://parislocaladmin.hotelmanager.fr"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200"
@@ -119,7 +119,7 @@ export default function Navbar({ activeSection: _activeSection }: { activeSectio
             Accès Guest
           </a>
           <a
-            href="https://admin.hotelmanager.fr"
+            href="https://parislocaladmin.hotelmanager.fr"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-white/60 hover:text-white py-2 border-b border-white/5"

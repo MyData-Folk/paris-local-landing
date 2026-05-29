@@ -41,7 +41,7 @@ export default function Footer() {
                 { label: "Tarifs", href: "#pricing" },
                 { label: "Feuille de route", href: "#roadmap" },
                 { label: "Accès Guest", href: "https://hotel.hotelmanager.fr", external: true },
-                { label: "Espace Réception", href: "https://admin.hotelmanager.fr", external: true },
+                { label: "Espace Réception", href: "https://parislocaladmin.hotelmanager.fr", external: true },
               ].map((link) => (
                 <li key={link.label}>
                   <a
