@@ -37,14 +37,14 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "dark:bg-[#0a0a0f]/95 bg-[#faf9f6]/95 backdrop-blur-xl dark:border-b dark:border-white/5 border-b border-[#c9a84c]/15 shadow-lg"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a
             href="#hero"
@@ -135,8 +135,8 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`lg:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? "max-h-[calc(100svh-4rem)] opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="mx-3 mb-4 p-4 rounded-2xl safe-bottom dark:bg-[#0d0d16]/97 bg-[#faf9f6]/97 backdrop-blur-xl dark:border border dark:border-white/8 border-[#c9a84c]/15 shadow-2xl">
+      <div className={`lg:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className="mx-3 mb-4 p-4 rounded-2xl dark:bg-[#0d0d16]/97 bg-[#faf9f6]/97 backdrop-blur-xl dark:border border dark:border-white/8 border-[#c9a84c]/15 shadow-2xl">
           <nav className="flex flex-col gap-0.5">
             {navLinks.map((link) => (
               <a
