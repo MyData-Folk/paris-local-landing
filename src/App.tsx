@@ -34,7 +34,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] dark:bg-[#0a0a0f] text-white font-['Inter',sans-serif] overflow-x-hidden transition-colors duration-300">
+    <div className={`min-h-screen text-white font-['Inter',sans-serif] overflow-x-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0a0a0f]' : ''}`}>
       <Navbar activeSection={activeSection} theme={theme} toggleTheme={toggleTheme} />
       <HeroSection />
       <FeaturesSection />
