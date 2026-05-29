@@ -1,26 +1,29 @@
-# Dockerfile de production pour Coolify
-# App React / Vite / Tailwind servie par Nginx
+﻿# syntax=docker/dockerfile:1
 
-FROM node:22-alpine AS builder
+# Build stage: Vite / React / Tailwind
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
-# Installation reproductible des dépendances
+# Install dependencies first for better Docker cache
 COPY package*.json ./
 RUN npm ci
 
-# Build de l'application
+# Copy source and build static files
 COPY . .
 RUN npm run build
 
-# Image finale légère avec Nginx
-FROM nginx:1.27-alpine AS runner
+# Runtime stage: lightweight Nginx static server
+FROM nginx:1.27-alpine AS runtime
 
-# Configuration SPA : fallback vers index.html
+# Remove default Nginx website
+RUN rm -rf /usr/share/nginx/html/*
+
+# Custom SPA config for Vite/React routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Fichiers générés par Vite
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy built app from build stage
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
