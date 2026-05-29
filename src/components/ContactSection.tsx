@@ -47,13 +47,13 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-14 sm:py-28 lg:py-36 dark:bg-[#0d0d16] bg-[#f3f1ec]">
+    <section id="contact" className="relative py-20 sm:py-28 lg:py-36 dark:bg-[#0d0d16] bg-[#f3f1ec]">
       {/* Glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
         <div className="w-[300px] sm:w-[700px] h-[200px] sm:h-[500px] rounded-full dark:bg-[#c9a84c]/4 bg-[#c9a84c]/10 blur-[80px] sm:blur-[180px]" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 safe-bottom">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-14 lg:mb-16">
           <span className="badge-gold mb-4 sm:mb-5 inline-flex">Démo de lancement</span>
@@ -110,7 +110,7 @@ export default function ContactSection() {
 
           {/* Form */}
           <div className="lg:col-span-3 order-1 lg:order-2">
-            <div className="dark:bg-white/[0.02] bg-white dark:border border dark:border-white/8 border-[#c9a84c]/12 rounded-2xl sm:rounded-3xl p-4 min-[380px]:p-5 sm:p-8 shadow-sm">
+            <div className="dark:bg-white/[0.02] bg-white dark:border border dark:border-white/8 border-[#c9a84c]/12 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm">
               {status === "success" ? (
                 <div className="text-center py-10 sm:py-16">
                   <div className="text-4xl sm:text-5xl mb-4">🎉</div>
@@ -214,7 +214,7 @@ export default function ContactSection() {
                     </label>
                     <textarea
                       name="message"
-                      rows={3}
+                      rows={4}
                       value={form.message}
                       onChange={handleChange}
                       placeholder="Dites-nous en plus sur vos besoins, vos enjeux actuels ou vos questions sur la solution…"

@@ -12,7 +12,7 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="grain min-h-[100svh] dark:bg-[#0a0a0f] bg-[#faf9f6] dark:text-white text-[#1a1a2e] transition-colors duration-300">
+      <div className="grain min-h-screen dark:bg-[#0a0a0f] bg-[#faf9f6] dark:text-white text-[#1a1a2e] transition-colors duration-300">
         <Navbar />
         <main>
           <HeroSection />
