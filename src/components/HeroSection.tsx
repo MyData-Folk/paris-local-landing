@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const rotatingWords = ["connecté", "rentable", "fluide", "local", "sans friction"];
+const rotatingWords = ["intelligent", "premium", "local", "connecté", "humain"];
 
 export default function HeroSection() {
   const [wordIdx, setWordIdx] = useState(0);
@@ -17,74 +17,93 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.querySelector(id);
+  const scrollToContact = () => {
+    const el = document.querySelector("#contact");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0f]">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#c9a84c]/6 blur-[180px] glow-pulse" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-[#c9a84c]/3 blur-[150px]" />
-        <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-[#e8c97a]/3 blur-[150px]" />
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20 pb-16 overflow-hidden"
+    >
+      {/* Background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] lg:w-[700px] h-[300px] sm:h-[500px] lg:h-[700px] rounded-full dark:bg-[#c9a84c]/6 bg-[#c9a84c]/12 blur-[80px] sm:blur-[120px] glow-pulse" />
+        <div className="absolute bottom-1/3 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full dark:bg-[#c9a84c]/3 bg-[#c9a84c]/6 blur-[80px] sm:blur-[100px]" />
+        <div className="absolute top-1/3 left-0 w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] rounded-full dark:bg-purple-900/8 bg-purple-200/20 blur-[60px] sm:blur-[80px]" />
       </div>
 
-      <div className="absolute inset-0 pointer-events-none opacity-[0.025]" style={{ backgroundImage: `linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">
-        <div className="animate-fade-in-up flex justify-center mb-7">
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Badge */}
+        <div className="animate-fade-in-up mb-6 sm:mb-8">
           <span className="badge-gold">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c9a84c] animate-pulse" />
             Lancement officiel · 1er juin 2026 · Hôtels parisiens
           </span>
         </div>
 
-        <h1 className="animate-fade-in-up-delay-1 font-playfair font-bold text-4xl sm:text-5xl lg:text-7xl leading-[1.08] tracking-tight text-white mb-6">
-          Le concierge digital
-          <br />
-          <span className="text-gold-gradient inline-block transition-all duration-350" style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(8px)" }}>
+        {/* Headline */}
+        <h1 className="animate-fade-in-up-delay-1 font-playfair text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 dark:text-white text-[#1a1a2e] leading-[1.15]">
+          Le concierge digital{" "}
+          <span
+            className="text-gold-gradient inline-block transition-all duration-350"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(-8px)" }}
+          >
             {rotatingWords[wordIdx]}
           </span>
-          <br />
-          <span className="text-white/90">pour votre hôtel</span>
+          <br className="hidden sm:block" />
+          {" "}pour votre hôtel
         </h1>
 
-        <p className="animate-fade-in-up-delay-2 text-white/50 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
-          Paris Local transforme chaque pancarte NFC ou QR code en canal direct avec vos clients : réponses aux questions fréquentes, collecte de coordonnées CRM, demandes housekeeping, recommandations locales et offres ciblées — sans application à télécharger.
+        {/* Subtitle */}
+        <p className="animate-fade-in-up-delay-2 text-sm sm:text-base lg:text-lg dark:text-white/50 text-[#1a1a2e]/55 max-w-xs sm:max-w-xl lg:max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 lg:mb-12">
+          Paris Local transforme chaque pancarte NFC ou QR code en canal direct avec vos clients : réponses aux questions fréquentes, collecte de coordonnées CRM, demandes housekeeping, recommandations locales et offres ciblées —{" "}
+          <span className="dark:text-white/70 text-[#1a1a2e]/70 font-medium">sans application à télécharger.</span>
         </p>
 
-        <div className="animate-fade-in-up-delay-3 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-          <button onClick={() => scrollTo("#contact")} className="group px-8 py-4 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-xl shadow-[#c9a84c]/25 hover:shadow-[#c9a84c]/40 hover:scale-[1.02] flex items-center gap-2">
-            Réserver ma démo de lancement
-            <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        {/* CTAs */}
+        <div className="animate-fade-in-up-delay-3 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 lg:mb-20 w-full">
+          <button
+            onClick={scrollToContact}
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm shadow-2xl shadow-[#c9a84c]/30 flex items-center justify-center gap-2 hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+          >
+            ✦ Démo lancement 2026 →
           </button>
-          <button onClick={() => scrollTo("#features")} className="px-8 py-4 rounded-xl border border-white/12 text-white/70 hover:text-white hover:border-white/25 hover:bg-white/4 font-medium text-sm transition-all duration-200 flex items-center gap-2">
-            Voir les bénéfices hôtel
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-          </button>
+          <a
+            href="#features"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#features")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-2xl dark:border border dark:border-white/10 border-[#1a1a2e]/15 dark:text-white/60 text-[#1a1a2e]/60 dark:hover:text-white hover:text-[#c9a84c] dark:hover:border-white/20 hover:border-[#c9a84c]/40 text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2"
+          >
+            Découvrir la solution ↓
+          </a>
         </div>
 
-        <div className="animate-fade-in-up-delay-4 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        {/* Stats grid */}
+        <div className="animate-fade-in-up-delay-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto w-full">
           {[
             { value: "NFC + QR", label: "Accès client instantané" },
             { value: "CRM", label: "Emails & téléphones qualifiés" },
-            { value: "- appels", label: "Moins de questions répétitives" },
+            { value: "− appels", label: "Moins de questions répétitives" },
             { value: "Housekeeping", label: "Demandes suivies et priorisées" },
           ].map((stat) => (
-            <div key={stat.label} className="bg-white/2 border border-white/7 rounded-xl p-4 hover:border-[#c9a84c]/20 transition-colors duration-300">
-              <div className="font-playfair font-bold text-[#c9a84c] text-lg sm:text-xl mb-1">{stat.value}</div>
-              <div className="text-white/40 text-xs leading-snug">{stat.label}</div>
+            <div
+              key={stat.value}
+              className="dark:bg-white/[0.03] bg-white/70 dark:border border dark:border-white/8 border-[#c9a84c]/15 rounded-xl sm:rounded-2xl p-3 sm:p-5 dark:hover:border-[#c9a84c]/20 hover:border-[#c9a84c]/35 transition-colors duration-300 shadow-sm"
+            >
+              <div className="font-playfair text-base sm:text-xl lg:text-2xl font-bold text-[#c9a84c] mb-1">{stat.value}</div>
+              <div className="dark:text-white/35 text-[#1a1a2e]/50 text-xs leading-snug">{stat.label}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <button onClick={() => scrollTo("#features")} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 hover:text-white/50 transition-colors duration-300">
-        <span className="text-xs tracking-widest uppercase">Découvrir</span>
-        <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent animate-float" />
-      </button>
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent pointer-events-none" />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+        <svg className="w-5 h-5 dark:text-white text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
     </section>
   );
 }
