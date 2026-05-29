@@ -25,16 +25,16 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20 pb-16 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden"
     >
       {/* Background blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] lg:w-[700px] h-[300px] sm:h-[500px] lg:h-[700px] rounded-full dark:bg-[#c9a84c]/6 bg-[#c9a84c]/12 blur-[80px] sm:blur-[120px] glow-pulse" />
-        <div className="absolute bottom-1/3 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full dark:bg-[#c9a84c]/3 bg-[#c9a84c]/6 blur-[80px] sm:blur-[100px]" />
-        <div className="absolute top-1/3 left-0 w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] rounded-full dark:bg-purple-900/8 bg-purple-200/20 blur-[60px] sm:blur-[80px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] sm:w-[500px] lg:w-[700px] h-[220px] sm:h-[500px] lg:h-[700px] rounded-full dark:bg-[#c9a84c]/6 bg-[#c9a84c]/12 blur-[48px] sm:blur-[120px] glow-pulse" />
+        <div className="absolute bottom-1/3 right-0 hidden sm:block w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full dark:bg-[#c9a84c]/3 bg-[#c9a84c]/6 blur-[80px] sm:blur-[100px]" />
+        <div className="absolute top-1/3 left-0 hidden sm:block w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] rounded-full dark:bg-purple-900/8 bg-purple-200/20 blur-[60px] sm:blur-[80px]" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 w-full max-w-5xl mx-auto">
         {/* Badge */}
         <div className="animate-fade-in-up mb-6 sm:mb-8">
           <span className="badge-gold">
@@ -44,7 +44,7 @@ export default function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="animate-fade-in-up-delay-1 font-playfair text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 dark:text-white text-[#1a1a2e] leading-[1.15]">
+        <h1 className="animate-fade-in-up-delay-1 font-playfair text-[2.15rem] min-[380px]:text-[2.45rem] sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 dark:text-white text-[#1a1a2e] leading-[1.08] sm:leading-[1.15] tracking-[-0.02em]">
           Le concierge digital{" "}
           <span
             className="text-gold-gradient inline-block transition-all duration-350"
@@ -57,13 +57,13 @@ export default function HeroSection() {
         </h1>
 
         {/* Subtitle */}
-        <p className="animate-fade-in-up-delay-2 text-sm sm:text-base lg:text-lg dark:text-white/50 text-[#1a1a2e]/55 max-w-xs sm:max-w-xl lg:max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 lg:mb-12">
+        <p className="animate-fade-in-up-delay-2 text-sm sm:text-base lg:text-lg dark:text-white/50 text-[#1a1a2e]/55 max-w-[22rem] sm:max-w-xl lg:max-w-2xl mx-auto leading-relaxed mb-7 sm:mb-10 lg:mb-12">
           Paris Local transforme chaque pancarte NFC ou QR code en canal direct avec vos clients : réponses aux questions fréquentes, collecte de coordonnées CRM, demandes housekeeping, recommandations locales et offres ciblées —{" "}
           <span className="dark:text-white/70 text-[#1a1a2e]/70 font-medium">sans application à télécharger.</span>
         </p>
 
         {/* CTAs */}
-        <div className="animate-fade-in-up-delay-3 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 lg:mb-20 w-full">
+        <div className="animate-fade-in-up-delay-3 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-16 lg:mb-20 w-full">
           <button
             onClick={scrollToContact}
             className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm shadow-2xl shadow-[#c9a84c]/30 flex items-center justify-center gap-2 hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
@@ -80,7 +80,7 @@ export default function HeroSection() {
         </div>
 
         {/* Stats grid */}
-        <div className="animate-fade-in-up-delay-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto w-full">
+        <div className="animate-fade-in-up-delay-4 grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto w-full">
           {[
             { value: "NFC + QR", label: "Accès client instantané" },
             { value: "CRM", label: "Emails & téléphones qualifiés" },
@@ -99,7 +99,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+      <div className="hidden sm:block absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
         <svg className="w-5 h-5 dark:text-white text-[#1a1a2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
         </svg>
