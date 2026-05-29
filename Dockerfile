@@ -1,30 +1,27 @@
 ﻿# syntax=docker/dockerfile:1
 
-# Build stage: Vite / React / Tailwind
 FROM node:22-alpine AS build
 
 WORKDIR /app
 
-# Install dependencies first for better Docker cache
 COPY package*.json ./
 RUN npm ci
 
-# Copy source and build static files
 COPY . .
 RUN npm run build
 
-# Runtime stage: lightweight Nginx static server
 FROM nginx:1.27-alpine AS runtime
 
-# Remove default Nginx website
+ENV PORT=3000
+
 RUN rm -rf /usr/share/nginx/html/*
 
-# Custom SPA config for Vite/React routing
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy built app from build stage
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:${PORT}/health || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]

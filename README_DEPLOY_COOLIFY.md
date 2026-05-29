@@ -1,10 +1,11 @@
-﻿# Déploiement Coolify
+﻿# Coolify deployment
 
-Configuration recommandée :
+Recommended settings:
 
-- Build Pack : Dockerfile
-- Port exposé : 80
-- Healthcheck path : /health
-- Start command : laisser vide
+- Build Pack: Dockerfile
+- Port / Exposed port: 3000
+- Healthcheck path: /health
+- Start command: leave empty
 
-Ce Dockerfile compile l'application Vite/React avec Node 22 puis sert le dossier `dist` avec Nginx.
+This Dockerfile builds the Vite/React app, then serves `dist` with Nginx.
+Nginx listens on the `PORT` environment variable, defaulting to 3000, which avoids common Coolify 503 reverse-proxy issues.
