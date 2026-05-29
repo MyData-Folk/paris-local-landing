@@ -17,6 +17,13 @@ const benefits = [
 
 const roomsOptions = ["Moins de 20 chambres", "20 à 50 chambres", "50 à 100 chambres", "Plus de 100 chambres", "Groupe multi-hôtels"];
 
+const priorityChips = [
+  "Collecter les emails et téléphones clients pour mon CRM",
+  "Réduire les appels et questions répétitives à la réception",
+  "Mieux suivre les demandes housekeeping",
+  "Créer des revenus via partenaires locaux et commissions",
+];
+
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>("idle");
@@ -92,7 +99,13 @@ export default function ContactSection() {
                 </div>
               ) : (
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-                  <h3 className="font-semibold text-white text-lg mb-6">Demander ma démo Paris Local</h3>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+                    <h3 className="font-semibold text-white text-lg">Demander ma démo Paris Local</h3>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] text-white/40">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c]" />
+                      Formulaire rapide · 30 secondes
+                    </div>
+                  </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div><label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Votre nom *</label><input required type="text" name="from_name" value={form.from_name} onChange={handleChange} placeholder="Votre nom" className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200" /></div>
@@ -113,8 +126,27 @@ export default function ContactSection() {
                   </div>
 
                   <div>
-                    <label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Votre priorité</label>
-                    <textarea name="message" value={form.message} onChange={handleChange} rows={5} placeholder="Exemple : récupérer les emails clients, réduire les appels à la réception, mieux gérer le housekeeping, proposer des partenaires locaux..." className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200 resize-none" />
+                    <div className="flex items-center justify-between gap-3 mb-2">
+                      <label className="text-white/40 text-xs block font-medium tracking-wide uppercase">Votre priorité</label>
+                      <span className="text-white/25 text-[11px]">1 clic pour pré-remplir</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                      {priorityChips.map((chip) => (
+                        <button
+                          key={chip}
+                          type="button"
+                          onClick={() => setForm({ ...form, message: chip })}
+                          className={`text-left rounded-xl border px-3 py-2.5 text-xs leading-snug transition-all duration-200 ${
+                            form.message === chip
+                              ? "border-[#c9a84c]/55 bg-[#c9a84c]/10 text-[#e8c97a]"
+                              : "border-white/10 bg-white/[0.03] text-white/45 hover:border-[#c9a84c]/30 hover:text-white/70"
+                          }`}
+                        >
+                          {chip}
+                        </button>
+                      ))}
+                    </div>
+                    <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Ajoutez un détail si besoin : nombre d'hôtels, besoins CRM, réception, housekeeping, partenariats locaux..." className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200 resize-none" />
                   </div>
 
                   {status === "error" && <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-red-300 text-sm">Le formulaire n'est pas encore configuré. Contactez-nous directement par email ou téléphone.</div>}
