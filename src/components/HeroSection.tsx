@@ -100,7 +100,7 @@ export default function HeroSection() {
 
         {/* Subtitle */}
         <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Paris Local transforme l'expérience client de votre hôtel : accueil par QR code, messagerie
+          Paris Local transforme l'expérience client de votre hôtel : accueil ultra-rapide par NFC & QR code, messagerie
           temps réel, recommandations locales personnalisées, et tableau de bord réception centralisé.
         </p>
 
@@ -124,7 +124,7 @@ export default function HeroSection() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
           {[
             { value: "< 5 min", label: "Onboarding hôtel" },
-            { value: "QR Code", label: "Accès client instantané" },
+            { value: "NFC & QR", label: "Accès client instantané" },
             { value: "Temps réel", label: "Messagerie Socket.IO" },
             { value: "Multi-hôtels", label: "Architecture SaaS" },
           ].map((stat) => (

@@ -11,7 +11,7 @@ const plans = [
     features: [
       "1 hôtel",
       "Jusqu'à 30 chambres",
-      "QR code d'accueil",
+      "Accès NFC & QR code",
       "Messagerie temps réel",
       "Recommandations locales (20 max)",
       "Demandes de service basiques",
@@ -31,7 +31,7 @@ const plans = [
     badge: "Le plus populaire",
     features: [
       "1 hôtel (chambres illimitées)",
-      "QR code personnalisé par chambre",
+      "Supports NFC & QR codes personnalisés",
       "Messagerie + Socket.IO temps réel",
       "Recommandations illimitées",
       "Toutes les demandes de service",

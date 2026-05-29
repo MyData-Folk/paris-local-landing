@@ -27,13 +27,13 @@ const steps = [
     num: "03",
     who: "Votre client",
     icon: "📱",
-    title: "Arrivée & scan QR Code",
+    title: "Arrivée & Connexion NFC / QR",
     description:
-      "À l'arrivée en chambre, le client scanne le QR code. Il accède instantanément à sa page d'accueil personnalisée : informations hôtel, messagerie, guide local.",
+      "À l'arrivée en chambre, le client approche simplement son smartphone de la puce NFC ou scanne le QR code. Il accède instantanément à son portail d'accueil personnalisé, sans aucun téléchargement d'application.",
     details: [
-      "Aucune app à télécharger",
-      "Page brandée aux couleurs de l'hôtel",
-      "Accès immédiat sans login",
+      "Puce NFC sans contact intégrée sur support élégant (bois/métal) en chambre",
+      "QR code complémentaire à scan rapide",
+      "Zéro friction : accès direct au wifi et aux services de l'hôtel",
     ],
     color: "#e8c97a",
   },
@@ -166,7 +166,7 @@ export default function HowItWorksSection() {
               {
                 title: "Layer Client",
                 icon: "📱",
-                items: ["Page Guest (QR)", "Messagerie", "Recommandations", "Demandes service"],
+                items: ["Page Guest (NFC & QR)", "Messagerie", "Recommandations", "Demandes service"],
                 bg: "from-[#c9a84c]/10",
               },
               {

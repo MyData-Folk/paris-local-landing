@@ -1,14 +1,14 @@
 const features = [
   {
     icon: "📱",
-    title: "Accueil QR Code",
+    title: "Accès NFC & QR Code",
     description:
-      "Chaque chambre dispose d'un QR code unique. Le client scanne et accède instantanément à son espace personnalisé — sans télécharger d'application.",
+      "Grâce à des puces NFC (sans contact) intégrées ou des QR codes uniques disposés dans les chambres et parties communes, le client accède instantanément à son espace personnalisé — sans télécharger d'application.",
     tag: "Guest Experience",
     details: [
-      "Page d'accueil brandée aux couleurs de l'hôtel",
-      "Résolution automatique via URL slug",
-      "Compatible tous smartphones",
+      "Puces NFC haute performance (sans contact) intégrées aux cartes de l'hôtel ou plaques de chambre",
+      "QR codes haute résolution de secours",
+      "Compatibilité totale (iOS & Android) sans téléchargement",
     ],
   },
   {
