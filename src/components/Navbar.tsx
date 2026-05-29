@@ -21,9 +21,9 @@ export default function Navbar({
   const navLinks = [
     { label: "Fonctionnalités", href: "#features" },
     { label: "Comment ça marche", href: "#how" },
-    { label: "Audit & Améliorations", href: "#audit" },
+    { label: "Démarrer", href: "#onboarding" },
     { label: "Tarifs", href: "#pricing" },
-    { label: "Feuille de route", href: "#roadmap" },
+    { label: "Témoignages", href: "#testimonials" },
   ];
 
   return (

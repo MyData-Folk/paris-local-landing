@@ -123,7 +123,7 @@ export default function HeroSection() {
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
           {[
-            { value: "< 5 min", label: "Onboarding hôtel" },
+            { value: "< 1h", label: "Onboarding hôtel" },
             { value: "NFC & QR", label: "Accès client instantané" },
             { value: "Temps réel", label: "Messagerie Socket.IO" },
             { value: "Multi-hôtels", label: "Architecture SaaS" },

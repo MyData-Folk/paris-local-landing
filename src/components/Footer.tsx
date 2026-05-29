@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0f] border-t border-white/5 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
@@ -38,8 +38,9 @@ export default function Footer() {
               {[
                 { label: "Fonctionnalités", href: "#features" },
                 { label: "Comment ça marche", href: "#how" },
+                { label: "Démarrer", href: "#onboarding" },
                 { label: "Tarifs", href: "#pricing" },
-                { label: "Feuille de route", href: "#roadmap" },
+                { label: "Témoignages", href: "#testimonials" },
                 { label: "Accès Guest", href: "https://hotel.hotelmanager.fr", external: true },
                 { label: "Espace Réception", href: "https://parislocaladmin.hotelmanager.fr", external: true },
               ].map((link) => (
@@ -48,30 +49,6 @@ export default function Footer() {
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className="text-white/40 text-sm hover:text-white/70 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Ressources */}
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Ressources</h4>
-            <ul className="space-y-2">
-              {[
-                { label: "Audit technique", href: "#audit" },
-                { label: "Documentation", href: "https://github.com/MyData-Folk/ParisLocalStack" },
-                { label: "Témoignages", href: "#" },
-                { label: "Blog", href: "#" },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="text-white/40 text-sm hover:text-white/70 transition-colors"
                   >
                     {link.label}

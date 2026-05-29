@@ -4,13 +4,14 @@ const plans = [
   {
     name: "Starter",
     tagline: "Idéal pour commencer",
-    price: { monthly: 89, yearly: 69 },
+    price: { monthly: 59, yearly: 45 },
     currency: "€",
     period: "/ hôtel / mois",
     highlight: false,
     features: [
       "1 hôtel",
       "Jusqu'à 30 chambres",
+      "Pancarte NFC + QR code offerte",
       "Accès NFC & QR code",
       "Messagerie temps réel",
       "Recommandations locales (20 max)",
@@ -24,14 +25,14 @@ const plans = [
   {
     name: "Business",
     tagline: "Pour les hôtels ambitieux",
-    price: { monthly: 199, yearly: 149 },
+    price: { monthly: 99, yearly: 75 },
     currency: "€",
     period: "/ hôtel / mois",
     highlight: true,
     badge: "Le plus populaire",
     features: [
       "1 hôtel (chambres illimitées)",
-      "Supports NFC & QR codes personnalisés",
+      "Pancarte NFC + QR codes personnalisés",
       "Messagerie + Socket.IO temps réel",
       "Recommandations illimitées",
       "Toutes les demandes de service",
@@ -47,9 +48,9 @@ const plans = [
   {
     name: "Enterprise",
     tagline: "Pour les groupes hôteliers",
-    price: { monthly: null, yearly: null },
-    currency: "",
-    period: "",
+    price: { monthly: 159, yearly: 120 },
+    currency: "€",
+    period: "/ hôtel / mois",
     highlight: false,
     features: [
       "Hôtels illimités",

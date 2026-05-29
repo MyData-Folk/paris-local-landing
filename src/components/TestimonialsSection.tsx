@@ -57,7 +57,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative py-32 bg-[#0d0d16]">
+    <section id="testimonials" className="relative py-32 bg-[#0d0d16]">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#c9a84c]/4 blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,7 +122,7 @@ export default function TestimonialsSection() {
         {/* Trust indicators */}
         <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
           {[
-            { value: "< 5 min", label: "Temps d'onboarding" },
+            { value: "< 1h", label: "Temps d'onboarding" },
             { value: "+40%", label: "NPS moyen client" },
             { value: "3x", label: "Plus rapide en réception" },
             { value: "99.9%", label: "Uptime garanti" },
