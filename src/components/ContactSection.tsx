@@ -1,33 +1,32 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID = "service_parislocal";
-const EMAILJS_TEMPLATE_ID = "template_demo_req";
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
-type Status = "idle" | "loading" | "success" | "error";
-
 const benefits = [
-  "Démo personnalisée orientée hôtel parisien",
-  "Audit rapide des points de contact client : chambre, réception, petit-déjeuner",
-  "Exemple de pancarte NFC + QR code",
-  "Scénario CRM : collecte email/téléphone et offres ciblées",
-  "Scénario opérationnel : demandes housekeeping et réception",
+  "Présentation personnalisée de la solution",
+  "Démo sur un hôtel fictif ou votre établissement",
+  "Discussion sur vos besoins CRM et opérationnels",
+  "Conditions et planning de lancement pour juin 2026",
+  "Réponse sous 48h ouvrées",
 ];
 
-const roomsOptions = ["Moins de 20 chambres", "20 à 50 chambres", "50 à 100 chambres", "Plus de 100 chambres", "Groupe multi-hôtels"];
-
-const priorityChips = [
-  "Collecter les emails et téléphones clients pour mon CRM",
-  "Réduire les appels et questions répétitives à la réception",
-  "Mieux suivre les demandes housekeeping",
-  "Créer des revenus via partenaires locaux et commissions",
-];
+const inputBase =
+  "w-full px-4 py-3 rounded-xl text-sm dark:bg-white/[0.04] bg-white dark:border border dark:border-white/10 border-[#c9a84c]/20 dark:text-white text-[#1a1a2e] dark:placeholder-white/25 placeholder-[#1a1a2e]/35 transition-all duration-200";
 
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<Status>("idle");
-  const [form, setForm] = useState({ from_name: "", reply_to: "", hotel_name: "", phone: "", rooms: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [form, setForm] = useState({
+    from_name: "",
+    reply_to: "",
+    hotel_name: "",
+    phone: "",
+    rooms: "",
+    message: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -48,114 +47,208 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-28 lg:py-36 bg-[#0a0a0f]">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none"><div className="w-[800px] h-[500px] rounded-full bg-[#c9a84c]/6 blur-[200px]" /></div>
+    <section id="contact" className="relative py-20 sm:py-28 lg:py-36 dark:bg-[#0d0d16] bg-[#f3f1ec]">
+      {/* Glow */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <div className="w-[300px] sm:w-[700px] h-[200px] sm:h-[500px] rounded-full dark:bg-[#c9a84c]/4 bg-[#c9a84c]/10 blur-[80px] sm:blur-[180px]" />
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
-          <span className="badge-gold mb-5 inline-flex">Démo de lancement</span>
-          <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Préparez votre hôtel pour le <span className="text-gold-gradient">1er juin 2026</span>
+        {/* Header */}
+        <div className="text-center mb-10 sm:mb-14 lg:mb-16">
+          <span className="badge-gold mb-4 sm:mb-5 inline-flex">Démo de lancement</span>
+          <h2 className="font-playfair text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 dark:text-white text-[#1a1a2e] leading-tight">
+            Préparez votre hôtel<br className="hidden sm:block" /> pour le 1er juin 2026
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto text-base">
+          <p className="dark:text-white/45 text-[#1a1a2e]/55 max-w-xs sm:max-w-xl mx-auto text-sm sm:text-base lg:text-lg">
             Demandez une présentation personnalisée : nous vous montrons comment Paris Local peut collecter des contacts CRM, réduire les demandes répétitives et optimiser le suivi housekeeping.
           </p>
         </div>
 
-        <div className="bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-5">
-            <div className="lg:col-span-2 p-8 lg:p-12 bg-gradient-to-br from-[#c9a84c]/10 via-transparent to-transparent border-b lg:border-b-0 lg:border-r border-white/8">
-              <h3 className="font-playfair text-2xl font-bold text-white mb-6">Ce que nous préparons ensemble</h3>
-              <ul className="space-y-4 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8">
+          {/* Left info panel */}
+          <div className="lg:col-span-2 order-2 lg:order-1">
+            <div className="dark:bg-white/[0.02] bg-white dark:border border dark:border-white/8 border-[#c9a84c]/12 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm h-full">
+              <h3 className="font-semibold dark:text-white text-[#1a1a2e] mb-4 sm:mb-5 text-base sm:text-lg">
+                Ce que nous préparons ensemble
+              </h3>
+              <ul className="space-y-3 mb-6 sm:mb-8">
                 {benefits.map((b) => (
-                  <li key={b} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#c9a84c]/18 border border-[#c9a84c]/35 flex items-center justify-center flex-shrink-0 mt-0.5"><span className="text-[#c9a84c] text-[10px] font-bold">✓</span></div>
-                    <span className="text-white/65 text-sm leading-snug">{b}</span>
+                  <li key={b} className="flex items-start gap-3 text-sm dark:text-white/55 text-[#1a1a2e]/60">
+                    <span className="text-[#c9a84c] flex-shrink-0 mt-0.5">✓</span>
+                    {b}
                   </li>
                 ))}
               </ul>
 
-              <div className="bg-white/[0.03] border border-white/8 rounded-2xl p-5 mb-7">
-                <p className="text-white/30 text-xs uppercase tracking-widest mb-4">Contact direct</p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2.5"><span className="text-[#c9a84c] text-sm">✉</span><a href="mailto:admin@e-hotelmanager.com" className="text-white/55 text-sm hover:text-white transition-colors animated-underline">admin@e-hotelmanager.com</a></div>
-                  <div className="flex items-center gap-2.5"><span className="text-[#c9a84c] text-sm">☎</span><a href="tel:+33672590479" className="text-white/55 text-sm hover:text-white transition-colors animated-underline">+33 (0)6 72 59 04 79</a></div>
-                  <div className="flex items-center gap-2.5"><span className="text-[#c9a84c] text-sm">📍</span><span className="text-white/35 text-xs">Paris et Île-de-France</span></div>
+              <div className="pt-5 sm:pt-6 dark:border-t border-t dark:border-white/8 border-[#c9a84c]/12">
+                <div className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-3">
+                  Contact direct
+                </div>
+                <div className="space-y-2.5">
+                  <a
+                    href="mailto:hello@parislocal.fr"
+                    className="flex items-center gap-2.5 text-sm dark:text-white/55 text-[#1a1a2e]/60 dark:hover:text-white hover:text-[#c9a84c] transition-colors"
+                  >
+                    <span className="text-[#c9a84c]">✉</span>
+                    hello@parislocal.fr
+                  </a>
+                  <div className="flex items-center gap-2.5 text-sm dark:text-white/45 text-[#1a1a2e]/50">
+                    <span>📍</span>
+                    Paris et Île-de-France
+                  </div>
                 </div>
               </div>
 
-              <p className="text-white/30 text-xs leading-relaxed">
-                Note : le formulaire nécessite la configuration de votre clé EmailJS en production. Vous pouvez aussi diriger les demandes vers l'email direct ci-dessus.
-              </p>
+              <div className="mt-5 sm:mt-6 p-3 sm:p-4 rounded-xl dark:bg-white/[0.02] bg-[#c9a84c]/5 dark:border border dark:border-white/5 border-[#c9a84c]/15">
+                <p className="text-xs dark:text-white/30 text-[#1a1a2e]/45 leading-relaxed">
+                  Note : le formulaire nécessite la configuration de votre clé EmailJS en production. Vous pouvez aussi contacter directement via l'email ci-dessus.
+                </p>
+              </div>
             </div>
+          </div>
 
-            <div className="lg:col-span-3 p-8 lg:p-12">
+          {/* Form */}
+          <div className="lg:col-span-3 order-1 lg:order-2">
+            <div className="dark:bg-white/[0.02] bg-white dark:border border dark:border-white/8 border-[#c9a84c]/12 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm">
               {status === "success" ? (
-                <div className="h-full min-h-[400px] flex flex-col items-center justify-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-[#c9a84c]/15 border border-[#c9a84c]/30 flex items-center justify-center mb-6"><span className="text-3xl">🎉</span></div>
-                  <h3 className="font-playfair text-2xl font-bold text-white mb-3">Demande envoyée !</h3>
-                  <p className="text-white/45 text-sm max-w-sm leading-relaxed mb-6">Votre demande a bien été reçue. Nous vous recontactons pour organiser la démonstration.</p>
-                  <button onClick={() => setStatus("idle")} className="text-[#c9a84c] text-sm hover:text-[#e8c97a] transition-colors underline underline-offset-2">Envoyer une autre demande</button>
+                <div className="text-center py-10 sm:py-16">
+                  <div className="text-4xl sm:text-5xl mb-4">🎉</div>
+                  <h3 className="font-playfair text-xl sm:text-2xl font-bold dark:text-white text-[#1a1a2e] mb-3">
+                    Demande envoyée !
+                  </h3>
+                  <p className="dark:text-white/50 text-[#1a1a2e]/55 text-sm sm:text-base max-w-sm mx-auto">
+                    Votre demande a bien été reçue. Nous vous recontactons pour organiser la démonstration.
+                  </p>
+                  <button
+                    onClick={() => setStatus("idle")}
+                    className="mt-6 text-sm text-[#c9a84c] hover:underline"
+                  >
+                    Envoyer une autre demande
+                  </button>
                 </div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-                    <h3 className="font-semibold text-white text-lg">Demander ma démo Paris Local</h3>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] text-white/40">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c]" />
-                      Formulaire rapide · 30 secondes
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-medium dark:text-white/50 text-[#1a1a2e]/55 mb-1.5 uppercase tracking-wide">
+                        Prénom &amp; Nom *
+                      </label>
+                      <input
+                        type="text"
+                        name="from_name"
+                        required
+                        value={form.from_name}
+                        onChange={handleChange}
+                        placeholder="Marie Dupont"
+                        className={inputBase}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium dark:text-white/50 text-[#1a1a2e]/55 mb-1.5 uppercase tracking-wide">
+                        Email professionnel *
+                      </label>
+                      <input
+                        type="email"
+                        name="reply_to"
+                        required
+                        value={form.reply_to}
+                        onChange={handleChange}
+                        placeholder="direction@hotel.fr"
+                        className={inputBase}
+                      />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div><label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Votre nom *</label><input required type="text" name="from_name" value={form.from_name} onChange={handleChange} placeholder="Votre nom" className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200" /></div>
-                    <div><label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Email professionnel *</label><input required type="email" name="reply_to" value={form.reply_to} onChange={handleChange} placeholder="direction@monhotel.fr" className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200" /></div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div><label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Nom de votre hôtel *</label><input required type="text" name="hotel_name" value={form.hotel_name} onChange={handleChange} placeholder="Hôtel exemple Paris" className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200" /></div>
-                    <div><label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Téléphone</label><input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+33 6 ..." className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200" /></div>
+                    <div>
+                      <label className="block text-xs font-medium dark:text-white/50 text-[#1a1a2e]/55 mb-1.5 uppercase tracking-wide">
+                        Nom de l'hôtel *
+                      </label>
+                      <input
+                        type="text"
+                        name="hotel_name"
+                        required
+                        value={form.hotel_name}
+                        onChange={handleChange}
+                        placeholder="Hôtel Saint-Germain"
+                        className={inputBase}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium dark:text-white/50 text-[#1a1a2e]/55 mb-1.5 uppercase tracking-wide">
+                        Téléphone
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={form.phone}
+                        onChange={handleChange}
+                        placeholder="+33 6 00 00 00 00"
+                        className={inputBase}
+                      />
+                    </div>
                   </div>
 
                   <div>
-                    <label className="text-white/40 text-xs mb-1.5 block font-medium tracking-wide uppercase">Taille de l'établissement</label>
-                    <select name="rooms" value={form.rooms} onChange={handleChange} className="w-full bg-[#11111a] border border-white/10 rounded-xl px-4 py-3 text-white text-sm transition-all duration-200">
-                      <option value="">Sélectionner</option>
-                      {roomsOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+                    <label className="block text-xs font-medium dark:text-white/50 text-[#1a1a2e]/55 mb-1.5 uppercase tracking-wide">
+                      Nombre de chambres
+                    </label>
+                    <select
+                      name="rooms"
+                      value={form.rooms}
+                      onChange={handleChange}
+                      className={`${inputBase} cursor-pointer dark:text-white/60`}
+                    >
+                      <option value="" className="dark:bg-[#0d0d16] bg-white">Sélectionner…</option>
+                      <option value="1-20" className="dark:bg-[#0d0d16] bg-white">1 – 20 chambres</option>
+                      <option value="21-50" className="dark:bg-[#0d0d16] bg-white">21 – 50 chambres</option>
+                      <option value="51-100" className="dark:bg-[#0d0d16] bg-white">51 – 100 chambres</option>
+                      <option value="100+" className="dark:bg-[#0d0d16] bg-white">100+ chambres</option>
                     </select>
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <label className="text-white/40 text-xs block font-medium tracking-wide uppercase">Votre priorité</label>
-                      <span className="text-white/25 text-[11px]">1 clic pour pré-remplir</span>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                      {priorityChips.map((chip) => (
-                        <button
-                          key={chip}
-                          type="button"
-                          onClick={() => setForm({ ...form, message: chip })}
-                          className={`text-left rounded-xl border px-3 py-2.5 text-xs leading-snug transition-all duration-200 ${
-                            form.message === chip
-                              ? "border-[#c9a84c]/55 bg-[#c9a84c]/10 text-[#e8c97a]"
-                              : "border-white/10 bg-white/[0.03] text-white/45 hover:border-[#c9a84c]/30 hover:text-white/70"
-                          }`}
-                        >
-                          {chip}
-                        </button>
-                      ))}
-                    </div>
-                    <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Ajoutez un détail si besoin : nombre d'hôtels, besoins CRM, réception, housekeeping, partenariats locaux..." className="w-full bg-white/4 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 transition-all duration-200 resize-none" />
+                    <label className="block text-xs font-medium dark:text-white/50 text-[#1a1a2e]/55 mb-1.5 uppercase tracking-wide">
+                      Message (optionnel)
+                    </label>
+                    <textarea
+                      name="message"
+                      rows={4}
+                      value={form.message}
+                      onChange={handleChange}
+                      placeholder="Dites-nous en plus sur vos besoins, vos enjeux actuels ou vos questions sur la solution…"
+                      className={`${inputBase} resize-none`}
+                    />
                   </div>
 
-                  {status === "error" && <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-red-300 text-sm">Le formulaire n'est pas encore configuré. Contactez-nous directement par email ou téléphone.</div>}
+                  {status === "error" && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                      Une erreur est survenue. Veuillez réessayer ou nous contacter directement.
+                    </div>
+                  )}
 
-                  <button type="submit" disabled={status === "loading"} className="w-full py-4 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-xl shadow-[#c9a84c]/20 disabled:opacity-60">
-                    {status === "loading" ? "Envoi en cours..." : "Réserver ma démo de lancement"}
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="w-full py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-[#c9a84c] to-[#e8c97a] text-[#0a0a0f] font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-lg shadow-[#c9a84c]/20 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                        Envoi en cours…
+                      </>
+                    ) : (
+                      "Demander une démonstration gratuite →"
+                    )}
                   </button>
 
-                  <p className="text-white/25 text-xs leading-relaxed">En envoyant ce formulaire, vous acceptez d'être recontacté au sujet de Paris Local. Les données transmises servent uniquement à traiter votre demande commerciale.</p>
+                  <p className="text-center text-xs dark:text-white/25 text-[#1a1a2e]/35">
+                    Aucune carte bancaire requise · Réponse sous 48h · Données protégées RGPD
+                  </p>
                 </form>
               )}
             </div>
